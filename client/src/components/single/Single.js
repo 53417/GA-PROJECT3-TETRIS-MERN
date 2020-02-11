@@ -17,7 +17,9 @@ export default class Single extends React.Component {
             currentKey: '',
             tempo: 0,
             lines_cleared: 0,
-            line_goal: 40
+            line_goal: 40,
+            start_time: 0,
+            end_time: 0
         };
         this.handleKeyPress = this.handleKeyPress.bind(this);
     }
@@ -53,8 +55,9 @@ export default class Single extends React.Component {
     handleKeyPress = (e) => {
         const keyCode = e.keyCode.toString();
         const map = {
-            32: () => {this.player_drop_piece()
-            console.log('space pressed')}, //space
+            27: () => {this.board_generate_data();
+                this.board_render()}, //esc
+            32: () => this.player_drop_piece(), //space
             37: () => this.player_move_left(), //left arrow
             38: () => this.player_rotate_right(), //up arrow
             39: () => this.player_move_right(), //right arrow
@@ -100,9 +103,19 @@ export default class Single extends React.Component {
         ctx.clearRect(0, 0, c.width, c.height);
 
         //draw cells
-        for(var key in this.state.board) {
-            this.cell_render(key)
+        for(let i = 40; i <= 239; i++) {
+            this.cell_render(i)
         };
+
+        //draw gray grid - v.ugly
+        // for(let i = 1; i < 10; i++) {
+        //     let x1 = (c.width / 10) * i;
+        //     let y1 = 0; 
+        //     let x2 = x1;
+        //     let y2 = c.height;
+        //     ctx.lineWidth = 1;
+        //     this.draw_line(x1, y1, x2, y2)
+        // };
 
         //draw outline
         ctx.beginPath();
@@ -115,6 +128,12 @@ export default class Single extends React.Component {
         ctx.stroke();
     }
 
+    set_start_time = () => {
+        this.setState({
+            start_time: Date.getTime()
+        })
+    }
+
     show_state = () => {
         console.log(this.state.board)
     }
@@ -123,17 +142,17 @@ export default class Single extends React.Component {
         let cell = this.state.board[cell_id];
         let c = document.getElementById('canvas');
         let ctx = c.getContext('2d');
-        let cell_width = c.width / this.state.cols;
-        let cell_height = c.height / this.state.rows;
+        let cell_width = c.width / 10;
+        let cell_height = c.height / 20;
 
         let x1 = (cell.col - 1) * cell_width; // 0, 0
-        let y1 = (cell.row - 1) * cell_height;
+        let y1 = (cell.row - 5) * cell_height;
         let x2 = ((cell.col - 1) * cell_width) + cell_width; // 50, 0
-        let y2 = (cell.row - 1) * cell_height;
+        let y2 = (cell.row - 5) * cell_height;
         let x3 = ((cell.col - 1) * cell_width) + cell_width; //50, 50
-        let y3 = ((cell.row - 1) * cell_height) + cell_height;
+        let y3 = ((cell.row - 5) * cell_height) + cell_height;
         let x4 = (cell.col - 1) * cell_width; //0, 50
-        let y4 = ((cell.row - 1) * cell_height) + cell_height;
+        let y4 = ((cell.row - 5) * cell_height) + cell_height;
         
         //outline
         if(cell.line_top === true) {
@@ -174,7 +193,7 @@ export default class Single extends React.Component {
         const { board } = this.state;
 
         //get active cells
-        for(let i = 39; i < 229; i++) {
+        for(let i = 9; i < 229; i++) {
             if(board[i] !== undefined) {
                 if(board[i].state === "active") {
                     //top check
@@ -490,12 +509,12 @@ export default class Single extends React.Component {
     piece_random = () => {
         const map = {
             0: () => this.piece_long(4),
-            1: () => this.piece_mrt(4),
-            2: () => this.piece_phat(4),
-            3: () => this.piece_l(4),
-            4: () => this.piece_bkl(5),
-            5: () => this.piece_s(4),
-            6: () => this.piece_bks(5)
+            1: () => this.piece_mrt(14),
+            2: () => this.piece_phat(24),
+            3: () => this.piece_l(14),
+            4: () => this.piece_bkl(15),
+            5: () => this.piece_s(14),
+            6: () => this.piece_bks(15)
         };
         let random = Math.floor(Math.random() * 7);
         const func = map[random];
@@ -1136,48 +1155,29 @@ export default class Single extends React.Component {
             <div style={{ height: "85vh" }} className="container valign-wrapper">
                 <div className="row">
                     <div className="col s12 center-align">
-                        <div>
-                            <Link
-                                to="/dashboard"
-                                style={{
-                                width: "150px",
-                                borderRadius: "3px",
-                                letterSpacing: "1.5px"
-                                }}
-                                className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-                            >
-                                dashboard
-                            </Link>
-                            <br></br>
-                            <button
-                                style={{
-                                    width: "150px",
-                                    borderRadius: "3px",
-                                    letterSpacing: "1.5px",
-                                    marginTop: "1rem"
-                                }}
-                                onClick={this.board_generate_data}
-                                className="btn btn-large waves-effect waves-light hoverable red accent-3"
-                            >
-                                Generate Board Data
-                            </button>
-                            
-                            <button
-                                style={{
-                                    width: "150px",
-                                    borderRadius: "3px",
-                                    letterSpacing: "1.5px",
-                                    marginTop: "1rem"
-                                }}
-                                onClick={this.board_render}
-                                className="btn btn-large waves-effect waves-light hoverable red accent-3"
-                            >
-                                Render Board
-                            </button>
-
-                            <h3>lines cleared: {this.state.lines_cleared}</h3>
-                            <canvas id="canvas" width="250" height="600"></canvas>
-                        </div>
+                        <Link
+                            to="/dashboard"
+                            style={{
+                            width: "150px",
+                            borderRadius: "3px",
+                            letterSpacing: "1.5px"
+                            }}
+                            className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                        >
+                            dashboard
+                        </Link>
+                    </div>
+                    <div className="col s12 center-align">
+                        <br></br>
+                        <br></br>
+                    </div>
+                    <div className="col s6 center-align">                         
+                        <canvas id="canvas" width="250" height="500"></canvas>
+                    </div>
+                    <div className="col s6 center-align">
+                        <h5>esc to start / restart</h5>
+                        <h5>lines cleared: {this.state.lines_cleared}</h5>
+                        <h5>Time: {this.state.end_time - this.state.start_time}</h5>
                     </div>
                 </div>
             </div>
