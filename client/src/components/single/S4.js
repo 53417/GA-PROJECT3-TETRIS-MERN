@@ -1202,7 +1202,7 @@ export default class Single extends React.Component {
 
     render() {
         return (
-            <div style={{ height: "85vh" }} className="container valign-wrapper">
+            <div style={{ height: "80vh" }} className="container valign-wrapper">
                 <div className="row">
                     <div className="col s6 center-align">                         
                         <canvas id="canvas" width="250" height="500"></canvas>
