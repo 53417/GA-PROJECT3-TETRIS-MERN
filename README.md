@@ -12,4 +12,6 @@ This is a Tetris clone
 # Try me
 https://desolate-castle-45400.herokuapp.com/
 
-By me
+Old repo: https://github.com/53417/GA-PROJECT3-TETRIS-old_rails_back-.git
+
+By me :)
