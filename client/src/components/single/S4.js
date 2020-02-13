@@ -39,7 +39,7 @@ export default class Single extends React.Component {
         this.board_generate_data();
         this.board_render();
         this.set_start_time();
-        this.increment_drop(500)
+        this.increment_drop(350)
     }
     
     componentWillUnmount() {
@@ -58,8 +58,8 @@ export default class Single extends React.Component {
             39: () => this.player_move_right(), //right arrow
             40: () => this.player_rotate_left(), //down arrow
             66: () => this.active_down(), //B
-            187: () => this.increment_drop(500), //= key TEST
-            189: () => this.test_incr(),//- key
+            // 187: () => this.increment_drop(500), //= key TEST
+            // 189: () => this.test_incr(),//- key
         };
         const func = map[keyCode];
         if (func) {
@@ -1194,7 +1194,7 @@ export default class Single extends React.Component {
         } else if (this.state.end_time === -1) {
             this.asset =
                 <div>
-                    <h1>You Died</h1>
+                    <h1>Game Over</h1>
                 </div>
             return this.asset
         }
@@ -1202,11 +1202,7 @@ export default class Single extends React.Component {
 
     render() {
         return (
-            <div style={{ height: "75vh" }} className="container valign-wrapper">
-                <div className="row">
-                    <br></br>
-                    <br></br>
-                </div>
+            <div style={{ height: "90vh" }} className="container valign-wrapper">
                 <div className="row">
                     <div className="col s6 center-align">                         
                         <canvas id="canvas" width="250" height="500"></canvas>
@@ -1214,18 +1210,13 @@ export default class Single extends React.Component {
                     <div className="col s6 center-align">
                         <h5>Lines remaining:</h5>
                         <h1>{this.state.line_goal - this.state.lines_cleared}</h1>
-                        <br></br>
                         {this.render_result()}
                     </div>
-                    <div className="col s12 center-align">
-                        <br></br>
-                        <br></br>
-                    </div>
                     <div className="col s6 center-align">
-                        <h5>ESC: Restart</h5>
-                        <h5>Arrows: Move</h5>
-                        <h5>Space: Drop</h5>
-                        <h5>B: Down 1</h5>
+                        <p>ESC: Restart</p>
+                        <p>Arrows: Move</p>
+                        <p>Space: Drop</p>
+                        <p>B: Down 1</p>
                     </div>
                     <div className="col s6 center-align">
                         <Link
