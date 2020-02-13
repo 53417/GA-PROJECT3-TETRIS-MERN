@@ -1163,7 +1163,7 @@ export default class Single extends React.Component {
     check_lose = () => {
         const { board } = this.state;
         for(let i = 30; i <= 39; i++){
-            if(board[i].state == "full" && this.state.completion_time === 0) {
+            if(board[i].state == "full") {
                 console.log("loser")
                 this.setState({
                     end_time: -1
