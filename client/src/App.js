@@ -12,6 +12,10 @@ import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
 import Single from "./components/single/Single";
+import S4 from "./components/single/S4";
+import S40 from "./components/single/S40";
+import S100 from "./components/single/S100";
+import Sendless from "./components/single/Sendless";
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -44,6 +48,10 @@ class App extends Component {
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute exact path="/single" component={Single} />
+              <PrivateRoute exact path="/s4" component={S4} />
+              <PrivateRoute exact path="/s40" component={S40} />
+              <PrivateRoute exact path="/s100" component={S100} />
+              <PrivateRoute exact path="/sendless" component={Sendless} />
             </Switch>
           </div>
         </Router>

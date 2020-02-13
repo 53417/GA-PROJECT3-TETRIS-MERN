@@ -20,32 +20,68 @@ return (
                 Back again?
               </p>
             </h4>
-            <Link
-              to="/single"
-              style={{
-                width: "150px",
-                borderRadius: "3px",
-                letterSpacing: "1.5px"
-              }}
-              className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-            >
-              Single
-            </Link>
-            <br></br>
-            <br></br>
-            <Link
-              to="/multi"
-              style={{
-                width: "150px",
-                borderRadius: "3px",
-                letterSpacing: "1.5px"
-              }}
-              className="btn btn-large waves-effect waves-light hoverable purple accent-3"
-            >
-              Multi
-            </Link>
-            <br></br>
-            <br></br>
+            <h4>Single Player</h4>
+
+            <div className="row">
+
+              <div className="col s3 center-align">
+                <Link
+                  to="/s4"
+                  style={{
+                    width: "150px",
+                    borderRadius: "3px",
+                    letterSpacing: "1.5px"
+                  }}
+                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                >
+                  4
+                </Link>
+              </div>
+
+              <div className="col s3 center-align">
+                <Link
+                  to="/s40"
+                  style={{
+                    width: "150px",
+                    borderRadius: "3px",
+                    letterSpacing: "1.5px"
+                  }}
+                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                >
+                  40
+                </Link>
+              </div>
+
+              <div className="col s3 center-align">
+                <Link
+                  to="/s100"
+                  style={{
+                    width: "150px",
+                    borderRadius: "3px",
+                    letterSpacing: "1.5px"
+                  }}
+                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                >
+                  100
+                </Link>
+              </div>
+              
+              <div className="col s3 center-align">
+                <Link
+                  to="/sendless"
+                  style={{
+                    width: "150px",
+                    borderRadius: "3px",
+                    letterSpacing: "1.5px"
+                  }}
+                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                >
+                  endless
+                </Link>
+              </div>
+
+            </div>
+            
             <button
               style={{
                 width: "150px",

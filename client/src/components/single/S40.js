@@ -17,7 +17,7 @@ export default class Single extends React.Component {
             currentKey: '',
             tempo: 0,
             lines_cleared: 0,
-            line_goal: 1,
+            line_goal: 40,
             start_time: 0,
             end_time: 0,
             completion_time: 0

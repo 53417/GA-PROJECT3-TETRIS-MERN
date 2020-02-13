@@ -17,7 +17,7 @@ export default class Single extends React.Component {
             currentKey: '',
             tempo: 0,
             lines_cleared: 0,
-            line_goal: 1,
+            line_goal: 999999999,
             start_time: 0,
             end_time: 0,
             completion_time: 0
@@ -1208,8 +1208,8 @@ export default class Single extends React.Component {
                         <canvas id="canvas" width="250" height="500"></canvas>
                     </div>
                     <div className="col s6 center-align">
-                        <h5>Lines remaining:</h5>
-                        <h1>{this.state.line_goal - this.state.lines_cleared}</h1>
+                        <h5>Lines cleared:</h5>
+                        <h1>{this.state.lines_cleared}</h1>
                         <br></br>
                         {this.render_result()}
                     </div>
